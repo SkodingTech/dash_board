@@ -2,6 +2,8 @@ import React from "react";
 import Hero from "./components/Hero";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 
 export default function Home() {
