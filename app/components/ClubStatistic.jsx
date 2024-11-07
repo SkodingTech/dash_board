@@ -33,14 +33,15 @@ const aggregatedHourlyData = aggregateHourlyToMonthly(hourlyData);
 
 const ClubStatistic = () => {
   return (
-    <div className="bg-white p-4 mx-8 rounded-lg shadow col-span-3" style={{ width: '800px', height: '500px' }}>
+    <div className="bg-white p-4 sm:mx-8 rounded-lg shadow col-span-3 w-full sm:w-10/12 sm:w-[90%] md:w-[95%] lg:w-auto mx-0 md:mx-8">
+  
       <h3 className="font-semibold mb-4 text-black">Club Statistic</h3>
       
       {/* Combined Data Line Chart */}
-      <div className="flex justify-center items-center mt-2 px-2 mb-2 h-full"> 
+      <div className="flex justify-center items-center mt-2 px-2 mb-2 ml-2">
         <LineChart
-          width={500} // Smaller width for the chart
-          height={300} // Smaller height for the chart
+          width={window.innerWidth < 640 ? 300 : window.innerWidth < 1024 ? 500 : 800} // Responsive width
+          height={400} // Fixed height for better aspect ratio
           series={[
             { data: aggregatedHourlyData, label: 'Hourly Users (Aggregated)', color: 'blue' },
             { data: monthlyData, label: 'Monthly Users', color: 'green' }

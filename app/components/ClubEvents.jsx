@@ -1,4 +1,5 @@
 // ClubEvents.jsx
+
 import React from 'react';
 
 const ClubEvents = () => {

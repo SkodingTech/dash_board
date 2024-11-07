@@ -28,24 +28,11 @@ const AddEditEventForm = ({ onCancel, existingEvent }) => {
     alert('Event successfully created!'); // Alert on successful event creation
   };
 
-  // Close the form when the backspace key is pressed
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === 'Backspace') {
-        event.preventDefault(); // Prevent default backspace behavior
-        onCancel();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [onCancel]);
+  
 
   return (
-    <div className="backdrop-filter backdrop-blur-lg bg-white bg-opacity-40 p-6 rounded-lg shadow-md mb-6">
-      <form onSubmit={handleSubmit(onSubmit)} className="p-6 bg-white bg-opacity-70 shadow-md rounded-lg">
+    <div className="bg-white p-4 rounded-lg w-full sm:w-[90%] md:w-[95%] lg:w-auto mx-0 md:mx-8 my-10">
+      <form onSubmit={handleSubmit(onSubmit)} >
         <h2 className="text-xl font-bold mb-4 text-black">Add/Edit Event</h2>
 
         {/* Club */}
@@ -132,10 +119,10 @@ const AddEditEventForm = ({ onCancel, existingEvent }) => {
           />
         </div>
 
-        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded mr-2">
+        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded mr-2 hover:bg-gradient-to-br from-[#00FF9C] via-[#6A9C89] to-pink-500">
           Create Event
         </button>
-        <button type="button" onClick={onCancel} className="bg-red-500 text-white px-4 py-2 rounded">
+        <button type="button" onClick={onCancel} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br from-[#00FF9C] via-[#6A9C89] to-pink-500">
           Cancel
         </button>
       </form>

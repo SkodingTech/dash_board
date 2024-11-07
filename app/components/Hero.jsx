@@ -1,5 +1,5 @@
 "use client"; // Client component directive
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Menu from './Menu';
@@ -8,82 +8,105 @@ import ClubEvents from './ClubEvents';
 import SiteHealth from './SiteHealth';
 import OnlineSales from './OnlineSales';
 import SalesRevenue from './SalesRevenue';
-import AddEditEventForm from './AddEditEventForm'; // Ensure the path is correct
-import UpcomingEvents from './UpcomingEvents';
+import AddEditEventForm from './events/AddEditEventForm';
+import ViewEvent from './events/ViewEvent';
+import AddClub from './club/AddClub';
+import ViewClub from './club/ViewClub';
+import AddUser from './users/AddUser';
+import ViewUser from './users/ViewUser';
+import BookingsManagement from './booking/ViewBookings';
+import Settings from './settings/SettingPage';
+import Reservation from '../reservations/ReservationPage';
+import Notification from '../notifications/NotificationPage';
 
 const Hero = () => {
   const router = useRouter();
 
-  // State to control visibility of forms
-  const [showAddEventForm, setShowAddEventForm] = useState(false);
-  const [showUpcomingEvents, setShowUpcomingEvents] = useState(false);
-  const [menuCollapsed, setMenuCollapsed] = useState(true); // State to control the menu
+  const [visibility, setVisibility] = useState({
+    addEventForm: false,
+    viewEvents: false,
+    addClub: false,
+    viewClub: false,
+    addUser: false,
+    viewUser: false,
+    viewBooking: false,
+    reservationPage: false,
+    notificationPage: false,
+    settingPage: false,
+  });
 
-  // Function to toggle the Add Event Form
-  const toggleAddEventForm = () => {
-    setShowAddEventForm(!showAddEventForm);
-    setShowUpcomingEvents(false); // Hide Upcoming Events when toggling the form
-    setMenuCollapsed(!menuCollapsed); // Collapse menu when form is toggled
-  };
-
-  // Function to show Upcoming Events
-  const toggleUpcomingEvents = () => {
-    setShowUpcomingEvents(!showUpcomingEvents);
-    setShowAddEventForm(false); // Hide Add Event Form when showing upcoming events
-    setMenuCollapsed(!menuCollapsed); // Collapse menu when toggling the events
+  const toggleComponent = (component) => {
+    setVisibility((prevState) => ({
+      ...prevState,
+      [component]: !prevState[component],
+      addEventForm: component === 'addEventForm' ? !prevState.addEventForm : false,
+      viewEvents: component === 'viewEvents' ? !prevState.viewEvents : false,
+      addClub: component === 'addClub' ? !prevState.addClub : false,
+      viewClub: component === 'viewClub' ? !prevState.viewClub : false,
+      addUser: component === 'addUser' ? !prevState.addUser : false,
+      viewUser: component === 'viewUser' ? !prevState.viewUser : false,
+      viewBooking: component === 'viewBookings' ? !prevState.viewBooking : false,
+      reservationPage: component === 'reservationPage' ? !prevState.reservationPage : false,
+      notificationPage: component === 'notificationPage' ? !prevState.notificationPage : false,
+      settingPage: component === 'settingPage' ? !prevState.settingPage : false,
+    }));
   };
 
   const handleIDClick = () => {
     router.push('/login');
   };
 
-  useEffect(() => {
-    const handleBackspace = (event) => {
-      if (event.key === 'Backspace' && (showAddEventForm || showUpcomingEvents)) {
-        setShowAddEventForm(false);
-        setShowUpcomingEvents(false);
-      }
-    };
+  const handleAddUserClick = () => {
+    toggleComponent('addUser');
+  };
 
-    // Add event listener for keydown
-    window.addEventListener('keydown', handleBackspace);
+  const handleViewUserClick = () => {
+    toggleComponent('viewUser');
+  };
 
-    // Cleanup event listener on component unmount
-    return () => {
-      window.removeEventListener('keydown', handleBackspace);
-    };
-  }, [showAddEventForm, showUpcomingEvents]);
+  const handleSettingClick = () => {
+    toggleComponent('settingPage'); // Toggle visibility for the settings page
+  };
 
   return (
-    <div className="min-h-screen flex bg-transparent">
-      {/* Sidebar with toggle function passed to Menu */}
+    <div className="min-h-screen flex bg-transparent flex-col md:flex-row">
+      {/* Sidebar */}
       <Menu 
-        onAddEventClick={toggleAddEventForm} 
-        onViewEventsClick={toggleUpcomingEvents} 
-        menuCollapsed={menuCollapsed} 
-        setMenuCollapsed={setMenuCollapsed} 
+        onAddEventClick={() => toggleComponent('addEventForm')}
+        onViewEventsClick={() => toggleComponent('viewEvents')}
+        onAddClubClick={() => toggleComponent('addClub')}
+        onViewClubClick={() => toggleComponent('viewClub')}
+        onBookingsClick={() => toggleComponent('viewBookings')} // Corrected
+        onReservationClick={() => toggleComponent('reservationPage')}
+        onNotificationClick={() => toggleComponent('notificationPage')}
+        onAddUserClick={handleAddUserClick}
+        onViewUsersClick={handleViewUserClick}
+        onSettingClick={handleSettingClick}
+        menuCollapsed={true}
+        setMenuCollapsed={() => {}}
       />
 
-      {/* Main Content */}
-      <main className="flex-1 p-6">
-        {/* Top Nav */}
-        <header className="flex justify-between items-center mb-6">
-          <p className="font-semibold text-black">Dashboard</p>
+      <main className="flex-1 p-4 md:p-6 lg:p-8">
+      <header className="flex flex-col md:flex-row justify-between items-center mb-6"> 
+          <p className="font-semibold text-black text-lg md:text-xl absolute top-7 right-4 sm:right-6 md:right-8 lg:static lg:top-auto lg:right-auto">
+            Dashboard
+          </p>
 
-          {/* Search Bar with Icon */}
-          <div className="relative flex-grow mx-6">
+          {/* Search Bar */}
+          <div className="relative flex-grow mx-0 md:mx-6 mb-4 md:mb-0 sm:w-full md:w-3/4 lg:w-full top-10 md:top-auto">
+          
             <input
               type="text"
               placeholder="Search..."
-              className="bg-gray-200 text-black p-2 rounded-full w-full h-10 pl-10 pr-4" // Adjusted padding for the icon
+              className="bg-gray-200 text-black p-2 rounded-full w-full h-10 pl-10 pr-4"
             />
-            {/* Search Icon */}
             <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
-              <i className="fa-solid fa-magnifying-glass"></i> {/* Search Icon */}
+              <i className="fa-solid fa-magnifying-glass"></i>
             </div>
           </div>
 
-          <div className="flex items-center space-x-4">
+          {/* Hidden on small and medium screens, visible on large screens */}
+          <div className="flex items-center space-x-4 hidden lg:flex">
             <div
               className="flex items-center bg-purple-100 p-2 rounded-full px-4 cursor-pointer"
               onClick={handleIDClick}
@@ -100,11 +123,11 @@ const Hero = () => {
                 width={40}
                 height={40}
               />
-              <div className="ml-4">
-                <span className="block font-semibold text-black">NAME</span>
+              <div className="ml-2">
+                <span className="block font-semibold text-black text-sm md:text-base">NAME</span>
                 <a
                   href="mailto:abc@gmail.com"
-                  className="text-gray-500 hover:text-blue-500 transition duration-200"
+                  className="text-gray-500 hover:text-blue-500 transition duration-200 text-xs md:text-sm"
                 >
                   abc@gmail.com
                 </a>
@@ -113,85 +136,91 @@ const Hero = () => {
           </div>
         </header>
 
-        {/* Dashboard Cards Container */}
-        <div className="bg-white bg-opacity-50 p-4 rounded-lg mx-8 my-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Notification Box */}
-            <div className="bg-yellow-100 p-4 rounded-lg shadow flex items-center">
-              <div className="bg-[#FFEB00] w-12 h-12 flex items-center justify-center rounded-full mr-4">
-                <i className="fa-solid fa-bell text-white text-3xl"></i> {/* Bigger Icon */}
-              </div>
-              <div>
-                <h3 className="font-semibold text-black">Notification</h3>
-                <p className="text-[#FFEB00] font-semibold text-sm">8 Unread Notifications</p>
-              </div>
+        <div className="bg-white bg-opacity-50 p-4 rounded-lg w-full sm:w-[90%] md:w-[95%] lg:w-auto mx-0 md:mx-8 my-10">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    
+    {/* Notification Box */}
+            <div className="bg-yellow-100 p-2 sm:p-3 md:p-4 lg:p-6 rounded-lg shadow flex items-center h-16 sm:h-30 md:h-24 lg:h-28 sm:w-30 md:w-34">
+            <div className="bg-[#FFEB00] w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 flex items-center justify-center rounded-full mr-2 sm:mr-3 md:mr-4 lg:mr-5">
+              <i className="fa-solid fa-bell text-white text-xs sm:text-sm md:text-xl lg:text-3xl"></i>
             </div>
 
-            {/* Events Box */}
-            <div className="bg-green-100 p-4 rounded-lg shadow flex items-center">
-              <div className="bg-[#06D001] w-12 h-12 flex items-center justify-center rounded-full mr-4">
-                <i className="fa-solid fa-bell text-white text-3xl"></i> {/* Bigger Icon */}
-              </div>
               <div>
-                <h3 className="font-semibold text-black">Events</h3>
-                <p className="text-[#06D001] font-semibold text-sm">4 Project Last Update</p>
+                <h3 className="font-semibold text-black text-[10px] sm:text-xs md:text-base lg:text-lg">
+                  Notification
+                </h3>
+                <p className="text-[#FFEB00] font-semibold text-[8px] sm:text-[9px] md:text-[10px] lg:text-base">
+                  8 Unread Notifications
+                </p>
               </div>
             </div>
-
-            {/* Clubs Box */}
-            <div className="bg-purple-100 p-4 rounded-lg shadow flex items-center">
-              <div className="bg-[#793FDF] w-12 h-12 flex items-center justify-center rounded-full mr-4">
-                <i className="fa-solid fa-bell text-white text-3xl"></i> {/* Bigger Icon */}
-              </div>
-              <div>
-                <h3 className="font-semibold text-black">Clubs</h3>
-                <p className="text-[#793FDF] font-semibold text-sm">6 Client Waiting</p>
-              </div>
+    {/* Events Box */}
+        <div className="bg-green-100 p-2 sm:p-3 md:p-4 lg:p-6 rounded-lg shadow flex items-center h-16 sm:h-30 md:h-24 lg:h-28 sm:w-30 md:w-34">
+        <div className="bg-[#06D001] w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 flex items-center justify-center rounded-full mr-2 sm:mr-3 md:mr-4 lg:mr-5">
+              <i className="fa-solid fa-bell text-white text-xs sm:text-sm md:text-xl lg:text-3xl"></i>
             </div>
-
-            {/* New Club Box */}
-            <div className="bg-blue-600 p-4 rounded-lg shadow flex items-center">
-              <div className="bg-white w-12 h-12 flex items-center justify-center rounded-full mr-4">
-                <i className="fa-solid fa-file text-blue-400 text-3xl"></i> {/* Bigger Icon */}
-              </div>
-              <div>
-                <h3 className="font-semibold text-white">New Club</h3>
-                <p className="text-white font-semibold text-sm">Project</p>
-              </div>
-            </div>
+          <div>
+            <h3 className="font-semibold text-black text-[10px] sm:text-xs md:text-base lg:text-lg">Events</h3>
+            <p className="text-[#06D001] font-semibold text-[8px] sm:text-[9px] md:text-[10px] lg:text-base">4 Project Last Update</p>
           </div>
         </div>
 
-        {/* Conditional rendering of forms */}
-        {showAddEventForm && <AddEditEventForm onCancel={toggleAddEventForm} />}
-        {showUpcomingEvents && <UpcomingEvents />}
+        {/* Clubs Box */}
+        <div className="bg-purple-100 p-2 sm:p-3 md:p-4 lg:p-6 rounded-lg shadow flex items-center h-16 sm:h-20 md:h-24 lg:h-28 sm:w-30 md:w-34">
+        <div className="bg-[#793FDF] w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 flex items-center justify-center rounded-full mr-2 sm:mr-3 md:mr-4 lg:mr-5">
+              <i className="fa-solid fa-bell text-white text-xs sm:text-sm md:text-xl lg:text-3xl"></i>
+            </div>
+          <div>
+            <h3 className="font-semibold text-black text-[10px] sm:text-xs md:text-base lg:text-lg">Clubs</h3>
+            <p className="text-[#793FDF] font-semibold text-[8px] sm:text-[9px] md:text-[10px] lg:text-base">6 Client Waiting</p>
+          </div>
+        </div>
+
+        {/* New Club Box */}
+        <div className="bg-blue-600 p-2 sm:p-3 md:p-4 lg:p-6 rounded-lg shadow flex items-center h-16 sm:h-20 md:h-24 lg:h-28 sm:w-30 md:w-34">
+        <div className="bg-white w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 flex items-center justify-center rounded-full mr-2 sm:mr-3 md:mr-4 lg:mr-5">
+              <i className="fa-solid fa-file text-indigo-600 text-xs sm:text-sm md:text-xl lg:text-3xl"></i>
+            </div>
+          <div>
+            <h3 className="font-semibold text-white text-[10px] sm:text-xs md:text-base lg:text-lg">New Club</h3>
+            <p className="text-white font-semibold text-[8px] sm:text-[9px] md:text-[10px] lg:text-base">Project</p>
+          </div>
+        </div>
+    </div>
+  </div>
+
+
+        {/* Conditional Rendering of Forms */}
+        {visibility.addEventForm && <AddEditEventForm onCancel={() => toggleComponent('addEventForm')} />}
+        {visibility.viewEvents && <ViewEvent onCancel={() => toggleComponent('viewEvents')} />}
+        {visibility.addClub && <AddClub onCancel={() => toggleComponent('addClub')} />}
+        {visibility.viewClub && <ViewClub onCancel={() => toggleComponent('viewClub')} />}
+        {visibility.addUser && <AddUser onCancel={() => toggleComponent('addUser')} />}
+        {visibility.viewUser && <ViewUser onCancel={() => toggleComponent('viewUser')} />}
+        {visibility.viewBooking && <BookingsManagement onCancel={() => toggleComponent('viewBookings')} />}
+        {visibility.reservationPage && <Reservation onCancel={() => toggleComponent('reservationPage')} />}
+        {visibility.notificationPage && <Notification onCancel={() => toggleComponent('notificationPage')} />}
+        {visibility.settingPage && <Settings onCancel={() => toggleComponent('settingPage')} />}
 
         {/* Club Statistics and Sales Revenue */}
-        {!showAddEventForm && !showUpcomingEvents && (
-          <div className="grid grid-cols-5 gap-4 mb-6">
-            {/* Club Statistic Section */}
+        {!visibility.addEventForm && !visibility.viewEvents && !visibility.addClub && !visibility.viewClub && !visibility.addUser && !visibility.viewUser && !visibility.viewBooking && !visibility.reservationPage && !visibility.notificationPage && !visibility.settingPage && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
             <ClubStatistic />
-
-            {/* Sales Revenue Section */}
             <div className="col-span-2 flex flex-col gap-4">
               <SalesRevenue />
-
-              {/* Club Events */}
               <ClubEvents />
             </div>
           </div>
         )}
 
-        {/* Site Health and Online Sales in a new row */}
-        {!showAddEventForm && !showUpcomingEvents && (
+        {/* Site Health and Online Sales */}
+        {!visibility.addEventForm && !visibility.viewEvents && !visibility.addClub && !visibility.viewClub && !visibility.addUser && !visibility.viewUser && !visibility.viewBooking && !visibility.reservationPage && !visibility.notificationPage && !visibility.settingPage && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            {/* Site Health */}
             <SiteHealth />
-
-            {/* Online Sales */}
             <OnlineSales />
           </div>
         )}
+
       </main>
     </div>
   );
