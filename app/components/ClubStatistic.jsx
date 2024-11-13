@@ -33,7 +33,7 @@ const aggregatedHourlyData = aggregateHourlyToMonthly(hourlyData);
 
 const ClubStatistic = () => {
   return (
-    <div className="bg-white p-4 sm:mx-8 rounded-lg shadow col-span-3 w-full sm:w-10/12 sm:w-[90%] md:w-[95%] lg:w-auto mx-0 md:mx-8">
+    <div className="bg-white p-4 sm:mx-8 rounded-lg shadow col-span-3 w-full sm:w-10/12 sm:w-[90%] md:w-[95%] lg:w-[95%] mx-0 md:mx-auto">
   
       <h3 className="font-semibold mb-4 text-black">Club Statistic</h3>
       

@@ -2,6 +2,7 @@ import React from "react";
 import Hero from "./components/Hero";
 import ServiceManagement from "./components/services/page";
 import Login from "./components/Login";
+import FinancialOverview from "./components/financialmanagement/FinancialOverview";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function Home() {
@@ -17,6 +18,10 @@ export default function Home() {
         
         <div className="my-4 sm:my-6 md:my-8 lg:my-10">
           <ServiceManagement />
+        </div>
+
+        <div className="my-4 sm:my-6 md:my-8 lg:my-10">
+          <FinancialOverview />
         </div>
       </div>
     </div>

@@ -47,24 +47,25 @@ const Menu = ({
 
   return (
     <>
-      {/* Hamburger Button (visible on small screens only) */}
+    
+    {/* Hamburger Button (visible on small, medium, and iPad Pro screens only) */}
       <button
-        className={`p-4 text-black bg-transparent cursor-pointer fixed top-4 left-4 z-50 md:hidden ${isMenuOpen ? 'hidden' : ''}`}
+        className={`p-4 text-black bg-transparent cursor-pointer absolute top-4 left-4 z-50 md:text-2xl lg:hidden ${isMenuOpen ? 'hidden' : ''}`}
         onClick={toggleMenu}
         aria-label="Toggle Menu"
       >
         <i className="fa-solid fa-bars" />
       </button>
 
-
-
       {/* Sidebar Menu */}
-      <aside className={`fixed top-0 left-0 w-64 bg-white shadow-md rounded-xl flex flex-col transition-transform duration-300 
-        ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:relative md:block md:w-64 z-40`}>
-          
-        {/* Cross Button inside Sidebar (visible on small screens only) */}
+      <aside
+        className={`fixed top-0 left-0 w-64 bg-white shadow-md rounded-xl flex flex-col transition-transform duration-300 
+          ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} 
+          lg:translate-x-0 lg:relative lg:block z-40`} 
+      >
+        {/* Cross Button inside Sidebar (visible on small, medium, and iPad Pro screens only) */}
         <button
-          className="p-4 text-black bg-transparent cursor-pointer absolute top-4 right-4 md:hidden"
+          className="p-4 text-black bg-transparent cursor-pointer absolute top-4 right-4 z-50 lg:hidden"
           onClick={toggleMenu}
           aria-label="Close Menu"
         >

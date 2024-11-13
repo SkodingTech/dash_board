@@ -3,7 +3,7 @@ import React from 'react';
 const ViewClub = ({ onCancel }) => (
     
         
-           <div className="bg-white p-4 rounded-lg w-full sm:w-[90%] md:w-[95%] lg:w-auto mx-0 md:mx-8 my-10">
+    <div className="bg-white p-4 rounded-lg w-full sm:w-[90%] md:w-[95%] lg:w-[97%] mx-0 md:mx-auto my-10">
             <h1 className="text-xl md:text-2xl font-bold text-black  md:text-left">View Clubs Page</h1>
             <p className="mt-3 md:mt-5 text-gray-600 font-semibold md:text-left">Welcome to the Clubs page.</p>
             <p className="mt-3 text-gray-600 text-justify">

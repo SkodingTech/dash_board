@@ -45,15 +45,14 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-transparent lg:bg-transparent p-4 lg:p-0">
+    <div className="flex items-center justify-center min-h-screen bg-transparent lg:bg-transparent p-4 lg:p-0 ipad:p-6 ipad:pt-10">
       <div
-        className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-[90%] md:w-[80%] lg:w-[40%] xl:w-[30%] mx-auto my-10 lg:my-20 border border-white/30"
+        className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-[90%] md:w-[95%] lg:w-[40%] xl:w-[30%] mx-auto my-10 lg:my-20 ipad:my-6 ipad:w-[60%] ipad-landscape:w-[50%] border border-white/30"
         style={{
           background: "rgba(255, 255, 255, 0.1)",
-          backdropFilter: "blur(10px)",
         }}
       >
-        <h2 className="text-2xl font-semibold mb-4 text-center text-black">Login</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-start text-black">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-500 text-sm font-bold mb-2" htmlFor="email">
@@ -92,7 +91,7 @@ const Login = () => {
           <div className="flex items-center justify-between">
             <button
               type="submit"
-              disabled={emailError || !email || !password} // Disable if email or password is invalid/empty
+              disabled={emailError || !email || !password}
               className={`w-full bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
                 emailError || !email || !password ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'
               }`}

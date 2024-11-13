@@ -195,8 +195,21 @@ const BookingsManagement = ({ onCancel }) => {
     };
 
     return (
-        <div className="bg-white p-6 rounded-lg w-full sm:w-[90%] md:w-[95%] lg:w-auto mx-0 md:mx-8 my-10">
+        <div className="bg-white p-4 rounded-lg w-full sm:w-[90%] md:w-[95%] lg:w-[97%] mx-0 md:mx-auto my-10">
             <h1 className="text-xl md:text-2xl font-bold mb-4 text-black md:text-left">User Management</h1>
+
+            {/* Search Bar */}
+            
+            <div className="relative mb-4">
+                <input
+            type="text"
+            placeholder="Search..."
+            className="bg-gray-200 text-black p-2 rounded-full w-full h-10 pl-10 pr-4"
+          />
+          <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </div>
+        </div>
 
             {/* Sort Controls */}
             <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-4 mb-4 items-center md:items-start">

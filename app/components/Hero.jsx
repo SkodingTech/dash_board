@@ -88,12 +88,14 @@ const Hero = () => {
 
       <main className="flex-1 p-4 md:p-6 lg:p-8">
       <header className="flex flex-col md:flex-row justify-between items-center mb-6"> 
-          <p className="font-semibold text-black text-lg md:text-xl absolute top-7 right-4 sm:right-6 md:right-8 lg:static lg:top-auto lg:right-auto">
+          <p className="font-semibold text-black text-lg md:text-xl absolute top-7 right-4 sm:right-6 md:right-8 md:top-9 lg:static lg:top-auto lg:right-auto">
             Dashboard
           </p>
 
+      
           {/* Search Bar */}
-          <div className="relative flex-grow mx-0 md:mx-6 mb-4 md:mb-0 sm:w-full md:w-3/4 lg:w-full top-10 md:top-auto">
+          {/*
+          <div className="relative flex-grow mx-0 md:mx-6 mb-4 md:mb-0 sm:w-full md:w-3/4 lg:w-full top-10 md:top-5 lg:top-auto">
           
             <input
               type="text"
@@ -103,10 +105,11 @@ const Hero = () => {
             <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
               <i className="fa-solid fa-magnifying-glass"></i>
             </div>
-          </div>
+          </div> 
+          */}
 
-          {/* Hidden on small and medium screens, visible on large screens */}
-          <div className="flex items-center space-x-4 hidden lg:flex">
+          {/* Hidden on small, medium, and iPad Pro screens, visible on large screens */}
+          <div className="flex items-center space-x-4 hidden lg:flex ipad:hidden ipad-landscape:hidden">
             <div
               className="flex items-center bg-purple-100 p-2 rounded-full px-4 cursor-pointer"
               onClick={handleIDClick}
@@ -135,10 +138,10 @@ const Hero = () => {
             </div>
           </div>
         </header>
-
-        <div className="bg-white bg-opacity-50 p-4 rounded-lg w-full sm:w-[90%] md:w-[95%] lg:w-auto mx-0 md:mx-8 my-10">
+        
+        <div className="bg-white bg-opacity-50 p-4 rounded-lg w-full sm:w-[90%] md:w-[95%] lg:w-[97%] mx-0 md:mx-auto my-10">
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
-    
+
     {/* Notification Box */}
             <div className="bg-yellow-100 p-2 sm:p-3 md:p-4 lg:p-6 rounded-lg shadow flex items-center h-16 sm:h-30 md:h-24 lg:h-28 sm:w-30 md:w-34">
             <div className="bg-[#FFEB00] w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 flex items-center justify-center rounded-full mr-2 sm:mr-3 md:mr-4 lg:mr-5">
@@ -215,10 +218,14 @@ const Hero = () => {
 
         {/* Site Health and Online Sales */}
         {!visibility.addEventForm && !visibility.viewEvents && !visibility.addClub && !visibility.viewClub && !visibility.addUser && !visibility.viewUser && !visibility.viewBooking && !visibility.reservationPage && !visibility.notificationPage && !visibility.settingPage && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <SiteHealth />
-            <OnlineSales />
-          </div>
+           <div className="grid grid-cols-1 gap-4 ipad:flex ipad:flex-col ipad:space-y-4 ipad-landscape:flex ipad-landscape:flex-row ipad-landscape:space-x-4 lg:grid lg:grid-cols-3 lg:gap-4 ipad:pl-4">
+           <div className="flex-1 ipad:mt-4">
+             <SiteHealth />
+           </div>
+           <div className="flex-1 ipad:mt-4">
+             <OnlineSales />
+           </div>
+         </div>
         )}
 
       </main>

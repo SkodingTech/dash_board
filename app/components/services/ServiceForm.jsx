@@ -50,8 +50,12 @@ const ServiceForm = ({ onSave, onCancel }) => {
     };
 
     return (
-        <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg mx-auto">
-            <h2 className="text-3xl font-semibold mb-6 text-gray-800">Add New Service</h2>
+        <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto ipad:w-[90%] ipad:max-w-none ipad:p-8 ipad:mt-8 ipad-landscape:w-[80%] ipad-landscape:max-w-none ipad-landscape:p-6 ipad-landscape:mt-10">
+
+            <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold mb-6 text-gray-800">
+                Add New Service
+            </h2>
+
             <form className="space-y-4">
                 <div>
                     <label className="block text-gray-700 font-medium mb-2">Service Name</label>
@@ -86,7 +90,7 @@ const ServiceForm = ({ onSave, onCancel }) => {
                 <div>
                     <label className="block text-gray-700 font-medium mb-2">Price</label>
                     <input
-                        type="text" // Set to "text" for validation
+                        type="text"
                         value={price}
                         onChange={handlePriceChange}
                         className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500 text-black"

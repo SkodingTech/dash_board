@@ -4,7 +4,8 @@ import React from 'react';
 
 const ClubEvents = () => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow">
+    <div className="bg-white p-6 sm:p-6 md:p-8 rounded-lg h-auto w-full sm:w-[90%] sm:top-4 md:top-6 md:w-[99%] lg:max-w-full md:mx-[2%] lg:top-auto lg:mx-auto">
+  
       <h3 className="font-semibold mb-4 text-black">Club Events</h3>
       <div className="mb-2">
         <div className="bg-blue-500 text-white p-2 rounded-lg">

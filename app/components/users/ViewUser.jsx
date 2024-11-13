@@ -3,7 +3,7 @@ import React from 'react';
 const ViewUser = ({ onCancel }) => {
   return (
     
-    <div className="bg-white p-4 rounded-lg w-full sm:w-[90%] md:w-[95%] lg:w-auto mx-0 md:mx-8 my-10">
+    <div className="bg-white p-4 rounded-lg w-full sm:w-[90%] md:w-[95%] lg:w-[97%] mx-0 md:mx-auto my-10">
     
       <h2 className="text-xl font-semibold text-black">View User</h2>
       

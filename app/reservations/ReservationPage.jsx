@@ -25,7 +25,7 @@ const reservations = [
 const Reservation = ({ onCancel }) => {
   return (
     
-    <div className="bg-white p-6 rounded-lg w-full sm:w-[90%] md:w-[95%] lg:w-auto mx-0 md:mx-8 my-10">
+    <div className="bg-white p-6 rounded-lg w-full sm:w-[90%] md:w-[95%] lg:w-[97%] mx-0 md:mx-auto my-10">
         <h1 className="text-2xl font-bold mb-4 text-black">Reservations</h1>
         {reservations.length > 0 ? (
           <ul className="space-y-4">

@@ -11,6 +11,11 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      screens: {
+        // Custom iPad Pro breakpoints (Portrait and Landscape)
+        'ipad': {'raw': '(min-width: 768px) and (max-width: 1024px)'},
+        'ipad-landscape': {'raw': '(min-width: 1024px) and (max-width: 1366px)'},
+      },
     },
   },
   plugins: [],
